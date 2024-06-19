@@ -1,5 +1,4 @@
 # Frontend Mentor Challenges
-
 Welcome to my [Frontend Mentor](https://www.frontendmentor.io/) challenge repository! Here, you'll find a collection of frontend challenges that I have completed. Each project was an opportunity to practice and enhance my skills in HTML, CSS, and JavaScript.
 
 ## About
@@ -26,12 +25,12 @@ To view the projects locally, follow these steps:
 
 ```bash
 # clone the repository
-git clone https://github.com/your-username/your-repository.git
+git clone https://github.com/luizgustavoou/frontend-mentor-challenges
 
 # navigate to the project directory
-cd challenges-frontendMentor/
+cd frontend-mentor-challenges/
 
 # navigate to the specific project folder
-cd <project>
+cd <project_name>
 
 # open the index.html
