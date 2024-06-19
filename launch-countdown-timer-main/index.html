@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <title>Frontend Mentor | Launch countdown timer</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap');
+
+    * {
+      font-family: "Red Hat Text", sans-serif;
+      margin: auto;
+      padding: 0;
+      box-sizing: border-box;
+      list-style-type: none;
+
+    }
+
+
+    .container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: hsl(235, 16%, 14%);
+    }
+
+    main {
+      width: 100%;
+      flex: 1;
+      background-image: url('./images/bg-stars.svg');
+      display: flex;
+      flex-direction: column;
+    }
+
+    .greeting {
+      color: hsl(0, 0%, 100%);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 20px;
+      letter-spacing: 5px;
+    }
+
+    .date {
+      display: flex;
+      gap: 2rem;
+    }
+    
+    .part-date {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .part-date p {
+      font-weight: 700;
+      text-transform: uppercase;
+      color: hsl(0, 0%, 60%);
+      letter-spacing: 5px;
+    }
+
+    .box {
+      background: linear-gradient( hsl(234, 17%, 12%) 1%, hsl(236, 21%, 26%));
+      width: 110px;
+      height: 110px;
+      border-radius: 0.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 50px;
+
+      font-weight: 700;
+    }
+
+    .box .value {
+      background: -webkit-linear-gradient(hsl(345, 95%, 50%) 35%, hsl(345, 95%, 70%));
+
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      -webkit-text-fill-color: transparent;
+    }
+
+    footer {
+      background-image: url('./images/pattern-hills.svg');
+      flex-basis: 150px;
+      width: 100%;
+      display: flex;
+
+    }
+
+
+    .social-media {
+      display: flex;
+      gap: 1rem;
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <main>
+      <header>
+        <h1 class="greeting">
+          We're launching soon
+        </h1>
+      </header>
+
+      <div class="date">
+        <div class="part-date">
+          <div class="box">
+            <span class="value">
+              08
+            </span>
+          </div>
+
+          <p>Days</p>
+        </div>
+
+        <div class="part-date">
+          <div class="box">
+            <span class="value">
+              23
+            </span>
+          </div>
+
+          <p>Hours</p>
+        </div>
+
+        <div class="part-date">
+          <div class="box">
+            <span class="value">
+              55
+            </span>
+          </div>
+
+          <p>Minutes</p>
+        </div>
+
+        <div class="part-date">
+          <div class="box">
+            <span class="value">
+              41
+            </span>
+          </div>
+
+          <p>Seconds</p>
+        </div>
+      </div>
+    
+    </main>
+
+    <footer>
+      <ul class="social-media">
+        <li>
+          <img src="./images/icon-facebook.svg" alt="logo">
+        </li>
+        <li>
+          <img src="./images/icon-pinterest.svg" />
+        </li>
+        <li>
+          <img src="./images/icon-instagram.svg" />
+        </li>
+      </ul>
+    </footer>
+
+  </div>
+
+</body>
+
+</html>

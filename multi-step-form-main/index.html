@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png" />
+
+  <title>Frontend Mentor | Multi-step form</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="script.js" defer></script>
+
+  <style>
+    :root {
+      --primary-h: 230;
+      --primary-s: 72%;
+      --primary-l: 62%;
+    }
+
+    @font-face {
+      font-family: Ubuntu;
+      src: url("./assets/fonts/Ubuntu-Regular.ttf");
+    }
+
+    * {
+      font-family: Ubuntu;
+      margin: 0;
+      box-sizing: border-box;
+      padding: 0;
+    }
+
+    body {
+      background-color: #f8f8f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    input::-webkit-input-placeholder {
+      color: hsl(0, 0%, 60%);
+      font-weight: 500;
+    }
+
+    input {
+      border: 1px solid hsl(0, 0%, 80%);
+      outline: none;
+      border-radius: 0.6rem;
+      padding: 0.8rem;
+      font-weight: 600;
+    }
+
+    input:focus {
+      border: 1px solid hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+      font-weight: bold;
+      border: 1px solid #ccc;
+    }
+
+    .btn-outline:hover {
+      background-color: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+      color: hsl(var(--primary-h), var(--primary-s), 100%);
+    }
+
+    button {
+      background-color: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+      border: none;
+      padding: 0.8rem;
+      width: fit-content;
+      border-radius: 0.5rem;
+      /* color: hsl(var(--primary-h), var(--primary-s), 100%);; */
+      color: hsl(var(--primary-h), var(--primary-s), 100%);
+
+      cursor: pointer;
+    }
+
+    button:hover {
+      --primary-l: 54%;
+    }
+
+    input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .box {
+      background-color: hsl(var(--primary-h), var(--primary-s), 100%);;
+      display: flex;
+      width: 800px;
+      max-width: 100%;
+      max-height: 100%;
+      height: 600px;
+      border-radius: 1rem;
+      padding: 0.8rem;
+    }
+
+    .radio-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+    }
+
+    .radio-item {
+      display: flex;
+      flex-direction: column;
+      width: 130px;
+      height: 100px;
+      border: 1px solid hsl(0, 0%, 80%);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      gap: 0.3rem;
+      cursor: pointer;
+    }
+
+    .icon-type {
+      max-width: 100%;
+      width: 25px;
+    }
+
+    .radio-item:has(input[type="radio"]:checked) {
+      border: 1px solid hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+    }
+
+    .radio-item .plan-type {
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    .checkbox-container {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      border: 1px solid hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+      padding: 1.5rem;
+      border-radius: 0.4rem;
+      cursor: pointer;
+    }
+
+
+    .checkbox-item .addon-info {
+      display: flex;
+      flex-direction: column;
+      margin-right: auto;
+    }
+
+    .checkbox-item .addon-info .addon-type {
+      font-weight: bold;
+    }
+
+    .checkbox-item .addon-price {
+      color: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+      font-weight: bold;
+    }
+
+    .text-muted {
+      font-size: 0.9rem;
+      color: hsl(0, 0%, 60%);
+    }
+
+    .sidebar {
+      counter-reset: step-counter;
+      display: flex;
+      flex-direction: column;
+      background-image: url("./assets/images/bg-sidebar-desktop.svg");
+      min-width: 35%;
+      background-size: contain;
+      background-repeat: no-repeat;
+      border-radius: 1rem;
+      padding: 1.8rem;
+      gap: 2.2rem;
+    }
+
+    .sidebar .step {
+      display: flex;
+      gap: 0.7rem;
+      align-items: center;
+    }
+
+    .sidebar .step .step-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    .sidebar .step::before {
+      counter-increment: step-counter;
+      content: counter(step-counter);
+      background-color: transparent;
+      border: 1px solid hsl(var(--primary-h), var(--primary-s), 100%);;
+      color: hsl(var(--primary-h), var(--primary-s), 100%);;
+      font-size: 0.8rem;
+      text-align: center;
+      width: 28px;
+      height: 28px;
+      line-height: 28px;
+      border-radius: 50%;
+    }
+
+    .sidebar .step.filled::before {
+      background-color: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+      --primary-l: 70%;
+    }
+
+    .sidebar :where(.title, .info) {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+
+    .sidebar .info {
+      font-weight: bold;
+    }
+
+    .sidebar .step .info {
+      color: hsl(var(--primary-h), var(--primary-s), 100%);;
+      letter-spacing: 1px;
+    }
+
+    form.registration {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 2rem;
+    }
+
+    form.registration header * {
+      margin-bottom: 0.5rem;
+    }
+
+    .form-step {
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .form-step.active {
+      width: auto;
+      height: 100%;
+    }
+
+    .actions {
+      display: flex;
+    }
+
+    .form-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .form-item.invalid :where(input, .radio-item, .checkbox-item) {
+      border: 1px solid hsl(0, var(--primary-s), var(--primary-l));;
+    }
+
+    .form-item.invalid .form-message {
+      margin-left: auto;
+      color: hsl(0, var(--primary-s), var(--primary-l));;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    .form-item label {
+      font-size: 0.9rem;
+    }
+
+
+    .choices {
+      background-color: hsl(0, 0%, 95%);
+      padding: 1.2rem;
+      border-radius: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .choices section {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .choices section:first-child {
+      border-bottom: 2px solid hsl(var(--primary-h), var(--primary-s), 100%);;
+      padding-bottom: 10px;
+      margin-bottom: 0.8rem;
+    }
+
+    .choices section:first-child .info .title {
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .choices section .info .change {
+      margin-top: 4px;
+      text-decoration: underline;
+    }
+
+
+    .choices section .price {
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .summary {
+      margin-top: 1rem;
+      padding: 0 0.5rem;
+      display: flex;
+      justify-content: space-between;
+
+    }
+
+    .summary .total {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+    }
+
+    .actions #next-btn {
+      margin-left: auto;
+    }
+
+    .acknowledgment {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0 1.5rem;
+      gap: 0.8rem;
+    }
+
+
+
+    /* Customize the label (the container) */
+    .container {
+      display: block;
+      position: relative;
+      padding-left: 35px;
+      margin-bottom: 12px;
+      cursor: pointer;
+
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    /* Hide the browser's default checkbox */
+    .container input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+
+    /* Create a custom checkbox */
+    .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 20px;
+      width: 20px;
+      border: 1px solid hsl(0, 0%, 95%);
+      border-radius: 0.2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container:hover input~.checkmark {
+      background-color: hsl(0, 0%, 80%);
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .container input:checked~.checkmark {
+      background-color: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+    }
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmark:after {
+      content: "";
+      display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .container input:checked~.checkmark:after {
+      display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .container .checkmark:after {
+      background-color: hsl(var(--primary-h), var(--primary-s), 100%);;
+      width: 10px;
+      height: 10px;
+      transition: 120ms transform ease-in-out;
+      box-shadow: inset 1em 1em var(--form-control-color);
+      transform-origin: bottom left;
+      clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <!-- Sidebar start -->
+     
+    <aside class="sidebar">
+      <div class="step filled">
+        <div class="step-content">
+          <span class="title text-muted"> Step 1 </span>
+          <span class="info"> Your info </span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-content">
+          <span class="title text-muted"> Step 2 </span>
+          <span class="info"> Select plan </span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-content">
+          <span class="title text-muted"> Step 3 </span>
+          <span class="info"> Add-ons </span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-content">
+          <span class="title text-muted"> Step 4 </span>
+          <span class="info"> Summary </span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Sidebar end -->
+
+    <form class="registration">
+
+
+
+      <!-- Step 1 start -->
+
+      <div class="form-step active">
+        <header>
+          <h1>Personal info</h1>
+
+          <p class="text-muted">
+            Please provide your name, email address, and phone number.
+          </p>
+        </header>
+
+        <div class="form-item">
+          <label for="name">
+            Name
+          </label>
+
+          <input type="text" id="name" placeholder="e.g. Stephen King" data-is-requihsl(0, var(--primary-s), var(--primary-l)); data-min="3" data-max="50">
+
+          <div class="form-message"></div>
+        </div>
+
+        <div class="form-item">
+          <label for="name">
+            Email Address
+          </label>
+
+          <input type="email" id="email" placeholder="e.g. stephenking@lorem.com" data-is-requihsl(0, var(--primary-s), var(--primary-l)); data-is-email>
+
+          <div class="form-message">
+
+          </div>
+        </div>
+
+        <div class="form-item">
+          <label for="name">
+            Phone
+          </label>
+
+          <input type="text" id="phone" placeholder="e.g. +1 234 567 890" data-is-requihsl(0, var(--primary-s), var(--primary-l)); data-is-phone>
+
+          <div class="form-message">
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 1 end -->
+
+      <!-- Step 2 start -->
+
+      <div class="form-step">
+        <header>
+          <h1>Select your plan</h1>
+
+          <p class="text-muted">
+            You have the option of monthly or yearly billing.
+          </p>
+        </header>
+
+        <div class="form-item">
+
+          <div class="radio-container">
+            <!-- <label class="radio-item">
+              <input type="radio" id="arcade" name="plan" value="arcade" data-is-requihsl(0, var(--primary-s), var(--primary-l));>
+              <img src="./assets/images/icon-arcade.svg" class="icon-type" />
+              <span class="plan-type">Arcade</span>
+              <span class="text-muted">$9/mo</span>
+
+            </label>
+
+            <label class="radio-item">
+              <input type="radio" id="advanced" name="plan" value="advanced" data-is-requihsl(0, var(--primary-s), var(--primary-l));>
+              <img src="./assets/images/icon-advanced.svg" class="icon-type" />
+
+              <span class="plan-type">Advanced</span>
+              <span class="text-muted">$12/mo</span>
+            </label>
+
+            <label class="radio-item">
+              <input type="radio" id="pro" name="plan" value="pro" data-is-requihsl(0, var(--primary-s), var(--primary-l));>
+              <img src="./assets/images/icon-pro.svg" class="icon-type" />
+
+              <span class="plan-type">Pro</span>
+              <span class="text-muted">$15/mo</span>
+            </label> -->
+          </div>
+
+          <div class="form-message"></div>
+        </div>
+      </div>
+
+      <!-- Step 2 end -->
+
+      <!-- Step 3 start -->
+
+      <div class="form-step">
+        <header>
+          <h1>Pick add-ons</h1>
+
+          <p class="text-muted">
+            Add-ons help enhance your gaming experience.
+          </p>
+        </header>
+
+        <div class="form-item">
+
+          <div class="checkbox-container">
+            <!-- <label class="checkbox-item">
+              <div class="container">
+                <input type="checkbox" id="online-service" name="addon" value="online-service" data-is-requihsl(0, var(--primary-s), var(--primary-l));>
+                <span class="checkmark"></span>
+              </div>
+
+              <div class="addon-info">
+                <span class="addon-type">Online service</span>
+                <span class="text-muted">Access to multiplayer games</span>
+              </div>
+              <span class="addon-price">$1/mo</span>
+
+            </label>
+
+            <label class="checkbox-item">
+              <div class="container">
+                <input type="checkbox" id="larger-storage" name="addon" value="larger-storage" data-is-requihsl(0, var(--primary-s), var(--primary-l));>
+
+                <span class="checkmark"></span>
+              </div>
+
+              <div class="addon-info">
+                <span class="addon-type">Larger Storage</span>
+                <span class="text-muted">Extra 1TB of cloud save</span>
+              </div>
+              <span class="addon-price">$2/mo</span>
+            </label>
+
+            <label class="checkbox-item">
+              <div class="container">
+                <input type="checkbox" id="customizable-profile" name="addon" value="customizable-profile" data-is-requihsl(0, var(--primary-s), var(--primary-l));>
+                <span class="checkmark"></span>
+              </div>
+
+              <div class="addon-info">
+                <span class="addon-type">Customizable profile</span>
+                <span class="text-muted">Custom theme on your profile</span>
+              </div>
+
+              <span class="addon-price">$2/mo</span>
+            </label> -->
+
+          </div>
+
+
+          <div class="form-message"></div>
+        </div>
+      </div>
+
+      <!-- Step 3 end -->
+
+      <!-- Step 4 start -->
+
+      <div class="form-step">
+        <header>
+          <h1>Finishing up</h1>
+
+          <p class="text-muted">
+            Double-check everything looks OK before confirming.
+          </p>
+        </header>
+
+        <section class="choices">
+          <section>
+            <div>
+              <p class="title">Acarde (Monthly)</p>
+              <p class="change text-muted">Change</p>
+            </div>
+            <p class="price">$9/mo</p>
+          </section>
+
+          <section>
+            <div>
+              <p class="title text-muted">Online service</p>
+            </div>
+
+            <p class="price">+$1/mo</p>
+          </section>
+
+          <section>
+            <div>
+              <p class="title text-muted">Larger storage</p>
+            </div>
+
+            <p class="price">+$2/mo</p>
+          </section>
+        </section>
+
+        <aside class="summary">
+          <p class="text-muted">Total (per month)</p>
+          <p class="total">+$12/mo</p>
+        </aside>
+      </div>
+
+      <!-- Step 4 end -->
+
+      <!-- Step 5 start -->
+
+      <div class="form-step">
+        <section class="acknowledgment">
+          <img style="max-width: 100%; width: 70px;" src="./assets/images/icon-thank-you.svg" />
+          <h1>Thank you!</h1>
+          <p class="text-muted" style="text-align: center;">
+            Thanks for confirming your subscription! We hope you have fun using our platform. If you ever need support,
+            please feel free to email us at support@loremgaming.com.
+          </p>
+        </section>
+      </div>
+
+      <!-- Step 5 end -->
+
+
+
+      <div class="actions">
+        <button type="button" id="back-btn" class="btn-outline">
+          Back
+        </button>
+
+        <button type="button" id="next-btn">
+          Next Step
+        </button>
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>
