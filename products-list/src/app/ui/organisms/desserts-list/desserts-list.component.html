@@ -1,33 +1,31 @@
 <h2 class="font-bold text-rose-900 text-3xl mb-8">Desserts</h2>
 
-    <div *ngIf="products.length > 0">
-      <ul class="flex flex-wrap gap-7">
-        <li *ngFor="let product of products">
-          <div class="relative mb-8">
-            <img [src]="product.image.desktop" [alt]="product.name" class="max-h-56 rounded-lg" />
+<div *ngIf="products.length > 0">
+  <ul class="flex flex-wrap gap-7">
+    <li *ngFor="let product of products">
+      <div class="relative mb-8">
+        <img [src]="product.image.desktop" [alt]="product.name" class="max-h-56 rounded-lg" />
 
-            <app-button class="absolute -bottom-8 left-1/2 transform -translate-x-1/2" backgroundColor="bg-red">
+        <app-button class="absolute -bottom-8 left-1/2 transform -translate-x-1/2" backgroundColor="bg-red"
+          (buttonClick)="handleClick($event, product)">
 
-              <mat-icon aria-hidden="false" aria-label="Add to cart" fontIcon="add_shopping_cart"></mat-icon>
+          <mat-icon aria-hidden="false" aria-label="Add to cart" fontIcon="add_shopping_cart"></mat-icon>
 
-              <span class="ml-2">
-                Add to Cart
+          <span class="ml-2">
+            Add to Cart
+          </span>
+        </app-button>
 
-              </span>
+      </div>
 
+      <p class="text-sm text-gray-500">{{ product.category }}</p>
+      <p class="font-semibold text-rose-950">{{ product.name }}</p>
+      <p class="font-semibold text-red">{{ product.price | currency }}</p>
 
-            </app-button>
+    </li>
+  </ul>
+</div>
 
-          </div>
-
-          <p class="text-sm text-gray-500">{{ product.category }}</p>
-          <p class="font-semibold text-rose-950">{{ product.name }}</p>
-          <p class="font-semibold text-red">{{ product.price | currency }}</p>
-
-        </li>
-      </ul>
-    </div>
-
-    <div *ngIf="products.length === 0">
-      <p>Carregando produtos...</p>
-    </div>
+<div *ngIf="products.length === 0">
+  <p>Carregando produtos...</p>
+</div>
