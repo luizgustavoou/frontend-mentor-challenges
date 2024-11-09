@@ -12,7 +12,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { CartComponent } from './ui/organisms/cart/cart.component';
 import { DessertsListComponent } from './ui/organisms/desserts-list/desserts-list.component';
 import { StoreModule } from '@ngrx/store';
-import { counterReducer } from './application/reducers/counter.reducer';
 import { AppState } from './application/states/app.state';
 import { cartReducer } from './application/reducers/cart.reducer';
 
@@ -25,10 +24,7 @@ import { cartReducer } from './application/reducers/cart.reducer';
     MatIconModule,
     CartComponent,
     DessertsListComponent,
-    StoreModule.forRoot<AppState>(
-      { counter: counterReducer, cart: cartReducer },
-      {}
-    ),
+    StoreModule.forRoot<AppState>({ cart: cartReducer }, {}),
   ],
   providers: [
     provideHttpClient(),

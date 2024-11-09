@@ -1,4 +1,4 @@
-export type Image = {
+export interface Image {
   thumbnail: string;
   mobile: string;
   tablet: string;

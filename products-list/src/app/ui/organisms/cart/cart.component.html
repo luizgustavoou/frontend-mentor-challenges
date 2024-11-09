@@ -1,5 +1,23 @@
 <div class="bg-white p-5 rounded-lg h-full">
-  <h2 class="font-bold text-2xl text-red">Your Cart ({{ cartProductsLength$ | async}})</h2>
+  <h2 class="font-bold text-2xl text-red mb-4">Your Cart ({{ cartProductsLength$ | async}})</h2>
 
+
+  <div class="flex flex-wrap items-center" *ngFor="let product of cartProductsAmount$ | async">
+    <div>
+      <p>{{ product.name }}</p>
+      <p class="text-sm text-red font-bold">
+        <span class="mr-3">{{ product.amount}}x</span>
+        <span class="mr-1">kk</span>
+        <span class="mr-3">{{ product.price | currency }}</span>
+        <span>{{ product.price * product.amount | currency }}</span>
+      </p>
+    </div>
+
+    <button class="ms-auto" (click)="handleRemoveProduct(product)">
+      <mat-icon aria-hidden="false" aria-label="Remove to cart" fontIcon="highlight_off"
+        class="opacity-50 hover:opacity-100"></mat-icon>
+    </button>
+
+    <hr class="block my-5 h-[1px] w-full border-t-0 bg-gray-300" />
+  </div>
 </div>
-
