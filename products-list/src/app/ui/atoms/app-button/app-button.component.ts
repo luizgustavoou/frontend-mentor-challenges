@@ -49,7 +49,7 @@ export class AppButtonComponent {
       destructive: 'bg-destructive text-destructive hover:bg-destructive/90',
       outline:
         'border border-input bg-background hover:bg-accent hover:text-accent',
-      secondary: 'bg-secondary text-secondary hover:bg-secondary/80',
+      secondary: 'bg-white hover:ring-1 border border-black hover:ring-red-500 hover:text-red-500 hover:border-none',
       ghost: 'hover:bg-accent hover:text-accent',
       link: 'text-primary underline-offset-4 hover:underline',
     };
