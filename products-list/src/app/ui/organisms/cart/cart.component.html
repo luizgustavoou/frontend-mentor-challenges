@@ -8,9 +8,9 @@
         <p>{{ product.name }}</p>
         <p class="text-sm text-red font-bold">
           <span class="mr-3">{{ product.quantity}}x</span>
-          <span class="mr-1">kk</span>
-          <span class="mr-3">{{ product.price | currency }}</span>
-          <span>{{ product.price * product.quantity | currency }}</span>
+          <span class="mr-1 text-gray-400">&#64;</span>
+          <span class="mr-3 text-gray-400">{{ product.price | currency }}</span>
+          <span class="text-gray-500">{{ product.price * product.quantity | currency }}</span>
         </p>
       </div>
 

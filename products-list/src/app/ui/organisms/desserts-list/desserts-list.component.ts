@@ -12,11 +12,12 @@ import {
   addProduct,
   removeProduct,
 } from '../../../application/actions/cart.action';
+import { CartItemComponent } from "../../molecules/cart-item/cart-item.component";
 
 @Component({
   selector: 'app-desserts-list',
   standalone: true,
-  imports: [AppButtonComponent, MatIconModule, CommonModule],
+  imports: [AppButtonComponent, MatIconModule, CommonModule, CartItemComponent],
   templateUrl: './desserts-list.component.html',
   styleUrl: './desserts-list.component.scss',
 })
