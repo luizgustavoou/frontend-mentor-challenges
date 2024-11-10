@@ -3,7 +3,7 @@
 
 
   <section class="flex-1 overflow-auto scroll-smooth">
-    <div *ngFor="let product of cartProductsAmount$ | async" class="flex flex-wrap items-center">
+    <div *ngFor="let product of cartProductsAmount$ | async" class="flex flex-wrap items-center px-2">
       <div>
         <p>{{ product.name }}</p>
         <p class="text-sm text-red font-bold">
@@ -21,7 +21,6 @@
 
       <hr class="block my-5 h-[1px] w-full border-t-0 bg-gray-300" />
     </div>
-
   </section>
 
 
