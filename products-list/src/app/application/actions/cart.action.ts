@@ -6,7 +6,7 @@ export const addProduct = createAction(
   props<{ product: Product }>()
 );
 
-export const removeProduct = createAction(
+export const clearProduct = createAction(
   '[Cart] Remove Product',
   props<{ id: string }>()
 );
