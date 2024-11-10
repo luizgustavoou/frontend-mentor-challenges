@@ -1,42 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-// @Component({
-//   selector: 'app-button',
-//   standalone: true,
-//   imports: [CommonModule],
-//   templateUrl: './app-button.component.html',
-//   styleUrls: ['./app-button.component.scss'],
-// })
-// export class AppButtonComponent {
-//   @Input() backgroundColor: string = 'bg-red-500';
-//   @Input() textColor: string = 'text-white';
-
-//   @Output() buttonClick = new EventEmitter<MouseEvent>();
-
-//   onClick(event: MouseEvent) {
-//     this.buttonClick.emit(event);
-//   }
-
-//   get buttonClasses(): string[] {
-//     return [
-//       'flex',
-//       'justify-center',
-//       'items-center',
-//       'w-fit',
-//       'min-w-[180px]',
-//       'py-3',
-//       'px-5',
-//       'rounded-full',
-//       'focus:outline-none',
-//       'focus:ring-2',
-//       'focus:ring-red-200',
-//       this.backgroundColor,
-//       this.textColor,
-//     ];
-//   }
-// }
-
 @Component({
   selector: 'app-button',
   standalone: true,
@@ -81,9 +45,8 @@ export class AppButtonComponent {
     ];
 
     const variantClasses: Record<string, string> = {
-      default: 'bg-red text-white hover:bg-red/90',
-      destructive:
-        'bg-destructive text-destructive hover:bg-destructive/90',
+      default: 'bg-red-500 text-white hover:bg-red-600',
+      destructive: 'bg-destructive text-destructive hover:bg-destructive/90',
       outline:
         'border border-input bg-background hover:bg-accent hover:text-accent',
       secondary: 'bg-secondary text-secondary hover:bg-secondary/80',
