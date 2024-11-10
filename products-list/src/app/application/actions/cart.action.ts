@@ -6,8 +6,13 @@ export const addProduct = createAction(
   props<{ product: Product }>()
 );
 
-export const clearProduct = createAction(
+export const removeProduct = createAction(
   '[Cart] Remove Product',
+  props<{ id: string }>()
+);
+
+export const clearProduct = createAction(
+  '[Cart] Clear product',
   props<{ id: string }>()
 );
 

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AppButtonComponent } from '../../atoms/app-button/app-button.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import { Product } from '../../../domain/entities/products';
+import { CartProduct, Product } from '../../../domain/entities/products';
 import { ProductsService } from '../../../application/services/products/products.service';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -18,7 +18,7 @@ import { addProduct } from '../../../application/actions/cart.action';
   styleUrl: './desserts-list.component.scss',
 })
 export class DessertsListComponent {
-  cartProducts$: Observable<Product[]>;
+  cartProducts$: Observable<CartProduct[]>;
 
   products: Product[] = [];
 

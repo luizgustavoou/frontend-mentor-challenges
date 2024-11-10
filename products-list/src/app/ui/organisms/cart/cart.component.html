@@ -3,14 +3,14 @@
 
 
   <section class="flex-1 overflow-auto scroll-smooth">
-    <div *ngFor="let product of cartProductsAmount$ | async" class="flex flex-wrap items-center px-2">
+    <div *ngFor="let product of cartProducts$ | async" class="flex flex-wrap items-center px-2">
       <div>
         <p>{{ product.name }}</p>
         <p class="text-sm text-red font-bold">
-          <span class="mr-3">{{ product.amount}}x</span>
+          <span class="mr-3">{{ product.quantity}}x</span>
           <span class="mr-1">kk</span>
           <span class="mr-3">{{ product.price | currency }}</span>
-          <span>{{ product.price * product.amount | currency }}</span>
+          <span>{{ product.price * product.quantity | currency }}</span>
         </p>
       </div>
 

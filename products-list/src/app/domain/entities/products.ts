@@ -9,6 +9,6 @@ export interface Product {
 };
 
 
-export interface ProductAmount extends Product {
-  amount: number;
+export interface CartProduct extends Product {
+  quantity: number;
 }
