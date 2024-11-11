@@ -2,7 +2,7 @@
   <img [src]="product.image.desktop" [alt]="product.name" class="max-h-56 rounded-lg" />
 
   <div *ngIf="cartProduct; else isNotInCart"
-    class="flex justify-between items-center bg-red-500 text-white rounded-full h-10 px-4 py-2 w-fit min-w-[180px] absolute -bottom-8 left-1/2 transform -translate-x-1/2">
+    class="flex justify-between items-center bg-red-500 text-white rounded-full h-10 px-4 py-2 w-fit min-w-[180px] absolute -bottom-6 left-1/2 transform -translate-x-1/2">
 
     <button class="flex items-center" (click)="onRemoveProduct($event)">
       <mat-icon aria-hidden="false" aria-label="Remove one product to cart" fontIcon="do_not_disturb_on"

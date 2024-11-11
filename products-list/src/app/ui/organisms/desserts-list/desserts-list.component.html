@@ -1,17 +1,22 @@
 <h2 class="font-bold text-rose-900 text-3xl mb-8">Desserts</h2>
 
-<div *ngIf="products.length > 0">
+<ng-content *ngIf="products$  | async as request; ">
 
-  <ul class="flex flex-wrap gap-7">
-    <li *ngFor="let product of products">
-      <app-cart-item [product]="product" [cartProduct]="productInCart(product.id) | async"
-        (addProduct)="handleAddProduct($event, product)" (removeProduct)="handleRemoveProduct($event, product)">
-      </app-cart-item>
+  <ng-content *ngIf="!request.loading; else loadingState">
+    <ul class="flex flex-wrap gap-7">
+      <li *ngFor="let product of request.data">
+        <app-cart-item [product]="product" [cartProduct]="productInCart(product.id) | async"
+          (addProduct)="handleAddProduct($event, product)" (removeProduct)="handleRemoveProduct($event, product)">
+        </app-cart-item>
 
-    </li>
-  </ul>
-</div>
+      </li>
+    </ul>
 
-<div *ngIf="products.length === 0">
-  <p>Carregando produtos...</p>
-</div>
+  </ng-content>
+
+  <ng-template #loadingState>
+    <app-cart-item-skeleton></app-cart-item-skeleton>
+  </ng-template>
+
+
+</ng-content>
